@@ -7,9 +7,15 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     </head>
     <body>
-        <div id="app">
-            <div class="alert alert-success" v-if="ok">v-if条件による描画</div>
-            <div class="alert alert-primary" v-show="ok">v-show条件による表示</div>
+        <div class="row">
+            <div id="app" class="col-8">
+                <ul class="list-group">
+                    <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-info" v-for="item in list" v-bind:key="item.id">
+                        ID. {{ item.id }} {{ item.name }}
+                        <span class="badge bg-primary rounded-pill" style="color: white;">{{ item.hp }}</span>
+                    </li>
+                </ul>
+            </div>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.js"></script>
         <script src="main.js"></script>

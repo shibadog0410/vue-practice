@@ -9,21 +9,35 @@
     <body>
         <div class="row">
             <div id="app" class="col-8">
-                <ul class="list-group">
-                    <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-info" v-for="item in list" v-bind:key="item.id">
-                        ID. {{ item.id }} {{ item.name }}
-                        <span class="badge bg-primary rounded-pill" style="color: white;">{{ item.hp }}</span>
+                <form class="row g-3 p-3">
+                    <div class="col-4 m-1">
+                        <input v-model="name" ref="input" class="form-control">
+                    </div>
+                    <div class="col-4 m-1">
+                        <button v-on:click="doAdd" type="button" class="btn btn-success">ADD</button>
+                    </div>
+                </form>
+
+                <ul class="list-group col-8">
+                    <li class="list-group-item" v-for="(item, index) in list" v-bind:key="item.id" v-if="item.hp">
+                        ID. {{ item.id }}  {{ item.name }}
+                        <span class="m-2 p-1 badge bg-primary rounded-pill" style="color: white;">{{ item.hp }}</span>
+                        <span v-if="item.hp < 50" class="m-2 p-1 badge bg-danger rounded-pill">Dying!</span>
+                        <div class="text-right">
+                            <button v-on:click="doRemove(index)" type="button" class="btn btn-danger">DELETE</button>
+                            <button v-on:click="doAttack(index)" type="button" class="btn btn-warning">ATTACK</button>
+                        </div>
                     </li>
                 </ul>
             </div>
         </div>
-        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.js"></script>
-        <script src="main.js"></script>
 
-        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.js"></script>
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script src="main.js"></script>
 
     </body>
 </html>

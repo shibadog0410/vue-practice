@@ -1,12 +1,16 @@
+var scroll = new SmoothScroll();
+
 new Vue({
     el: '#app',
     data: {
+        title: 'Monsters',
+        message: 'You can manage monsters.',
         name: 'Chimera',
-        list: []
-    },
+        list: [],
 
-    mounted: function () {
-        console.log(this.$refs.input);
+        scrollX: 0,
+        scrollY: 0,
+        timer: null
     },
 
     created: function () {
@@ -14,10 +18,25 @@ new Vue({
             this.list = response.data;
         }.bind(this)).catch(function(e) {
             console.error(e);
-        })
+        });
+
+        window.addEventListener('scroll', this.handleScroll);
     },
 
     methods: {
+
+        scrollTop: function () {
+            scroll.animateScroll(0);
+        },
+
+        handler: function (mes) {
+            console.log(mes);
+        },
+
+        doClick: function (index) {
+            alert(this.list[index].name);
+        },
+
         doAdd: function () {
             var max = this.list.reduce(function (a, b) {
                 return a > b.id ? a : b.id;
@@ -27,6 +46,7 @@ new Vue({
                 id: max + 1,
                 name: this.name,
                 hp: 500,
+                active: false,
             });
         },
 

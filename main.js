@@ -3,14 +3,24 @@ var scroll = new SmoothScroll();
 new Vue({
     el: '#app',
     data: {
+
         title: 'Monsters',
-        message: 'You can manage monsters.',
+        message: 'You can Search And Manage Monsters.',
         name: 'Chimera',
+
+        underHP: 300,
+        monsterLimit: 2,
+
         list: [],
 
         scrollX: 0,
         scrollY: 0,
-        timer: null
+        timer: null,
+
+        width: 800,
+        height: 600,
+
+        order: false,
     },
 
     created: function () {
@@ -56,6 +66,46 @@ new Vue({
 
         doAttack: function (index) {
             this.list[index].hp -= 10;
-        }
+        },
+
+        methodData: function () {
+            return Math.random();
+        },
+    },
+
+    computed: {
+
+        halfWidth: {
+            get: function () { return this.width / 2; },
+            set: function (val) { return this.width = val * 2; },
+        },
+
+        halfHeight: {
+            get: function () { return this.height / 2; },
+            set: function (val) { return this.height = val * 2; },
+        },
+
+        computedData: function () { return Math.random(); },
+
+        halfPoint: function () {
+            return {
+                x: this.halfWidth,
+                y: this.halfHeight,
+            }
+        },
+
+        matched: function () {
+            return this.list.filter(function (el) {
+                return el.hp <= this.underHP;
+            }, this);
+        },
+
+        sorted: function () {
+            return _.orderBy(this.matched, 'hp', this.order ? 'desc' : 'asc');
+        },
+
+        limited: function () {
+            return this.sorted.slice(0, this.monsterLimit);
+        },
     }
 });

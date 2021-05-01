@@ -5,7 +5,7 @@ new Vue({
     data: {
 
         title: 'Monsters',
-        message: 'You can Search And Manage Monsters.',
+        message: 'Search And Manage Monsters.',
         name: 'Chimera',
 
         underHP: 300,

@@ -1,15 +1,14 @@
 <template>
 <div class="background-image">
     <div class="background-overlay">
-    <div id="app">
-        <PageTitle :msg="msg"></PageTitle>
-        <LimitSearchForm :hp="hp" :limit="limit"></LimitSearchForm>
-        <AddForm :name="name"></AddForm>
-        <NameSearchForm :searchName="searchName"></NameSearchForm>
-        <Monsters :monsters="monsters"></Monsters>
-        <Scroll></Scroll>
+        <div id="app" class="px-5">
+            <PageTitle :msg="msg"></PageTitle>
+            <AddForm :name="name"></AddForm>
+            <SearchForm :hp="hp" :limit="limit" :searchName="searchName"></SearchForm>
+            <Monsters :monsters="monsters"></Monsters>
+            <Scroll></Scroll>
+        </div>
     </div>
-  </div>
 </div>
 </template>
 
@@ -17,8 +16,7 @@
 
 import monsters from './assets/data.json'
 import PageTitle from './components/PageTitle'
-import LimitSearchForm from './components/LimitSearchForm'
-import NameSearchForm from './components/NameSearchForm'
+import SearchForm from './components/SearchForm'
 import AddForm from './components/AddForm'
 import Monsters from './components/Monsters'
 import Scroll from './components/Scroll'
@@ -27,8 +25,7 @@ export default {
     name: 'App',
     components: {
         PageTitle,
-        LimitSearchForm,
-        NameSearchForm,
+        SearchForm,
         AddForm,
         Monsters,
         Scroll
@@ -38,7 +35,7 @@ export default {
     },
     data () {
         return {
-            msg: 'Search And Manage Monsters.',
+            msg: 'You Can Search And Add Monsters.',
             monsters: monsters,
             hp: 300,
             limit: 10,
@@ -49,7 +46,7 @@ export default {
     },
     computed: {
         title() { return this.$store.getters.title }
-        // matched: function () {
+        // matched() {
         //     return this.list.filter(function (el) {
         //         let isUnderHP = el.hp <= this.underHP;
         //         let nameContain = el.name.indexOf(this.searchName) === 0;
@@ -57,11 +54,11 @@ export default {
         //     }, this);
         // },
 
-        // sorted: function (el) {
+        // sorted(el) {
         //     return el.orderBy(this.matched, 'hp', this.order ? 'desc' : 'asc');
         // },
 
-        // limited: function () {
+        // limited() {
         //     return this.sorted.slice(0, this.monsterLimit);
         // },
     },

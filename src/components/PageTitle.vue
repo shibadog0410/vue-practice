@@ -1,8 +1,7 @@
 <template>
-<div id="pageTitle" class="mb-5">
+<div id="pageTitle" class="mb-3">
     <h1 class="display-1 font-weight-bold text-white">{{ title }}</h1>
-    <input type="text" v-model="title">
-    <h5 class="display-5 text-white">{{ msg }}</h5>
+    <p class="lead text-white">{{ msg }}</p>
 </div>
 </template>
 

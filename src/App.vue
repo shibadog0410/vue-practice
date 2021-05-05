@@ -2,7 +2,7 @@
 <div class="background-image">
     <div class="background-overlay">
     <div id="app">
-        <PageTitle></PageTitle>
+        <PageTitle :msg="msg"></PageTitle>
         <LimitSearchForm :hp="hp" :limit="limit"></LimitSearchForm>
         <AddForm :name="name"></AddForm>
         <NameSearchForm :searchName="searchName"></NameSearchForm>
@@ -14,6 +14,7 @@
 </template>
 
 <script>
+
 import monsters from './assets/data.json'
 import PageTitle from './components/PageTitle'
 import LimitSearchForm from './components/LimitSearchForm'
@@ -37,6 +38,7 @@ export default {
     },
     data () {
         return {
+            msg: 'Search And Manage Monsters.',
             monsters: monsters,
             hp: 300,
             limit: 10,
@@ -46,6 +48,7 @@ export default {
         }
     },
     computed: {
+        title() { return this.$store.getters.title }
         // matched: function () {
         //     return this.list.filter(function (el) {
         //         let isUnderHP = el.hp <= this.underHP;
